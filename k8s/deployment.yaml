@@ -18,8 +18,4 @@ spec:
       - name: "webserver"
         image: "nginx:latest"
         ports:
-          - containerPort: 80 
-      - name: "database-server"
-        image: "mysql:8.0"
-        ports:
-          - containerPort: 3306
+          - containerPort: 80
