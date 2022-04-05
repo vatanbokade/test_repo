@@ -5,24 +5,26 @@ pipeline {
         
     stage('Git') {
       steps {
-        git branch: 'mediaagility', credentialsId: 'gitlabsuchita', url: 'https://gitlab.extramarks.com/root/newapigateway.git'
+        git branch: 'main', url: 'https://github.com/vatanbokade/test_repo.git'
       }
     }
+  }
+}
          
-    stage('Build Docker image'){
-          steps{
+    // stage('Build Docker image'){
+    //       steps{
                
-               sh 'docker build -t asia-south1-docker.pkg.dev/em-uat/extramarks/newapigateway/dev:${BUILD_NUMBER} -f Dockerfile-dev .'
-          }
-      }
+    //            sh 'docker build -t asia-south1-docker.pkg.dev/em-uat/extramarks/newapigateway/dev:${BUILD_NUMBER} -f Dockerfile-dev .'
+    //       }
+    //   }
     
-    stage('Docker push to Artifact Registry')
-    {       steps{
-                sh 'gcloud auth configure-docker asia-south1-docker.pkg.dev --quiet'
-                sh 'docker push asia-south1-docker.pkg.dev/em-uat/extramarks/newapigateway/dev:${BUILD_NUMBER}'
-           }
+    // stage('Docker push to Artifact Registry')
+    // {       steps{
+    //             sh 'gcloud auth configure-docker asia-south1-docker.pkg.dev --quiet'
+    //             sh 'docker push asia-south1-docker.pkg.dev/em-uat/extramarks/newapigateway/dev:${BUILD_NUMBER}'
+    //        }
     
-       }
+    //    }
     //  stage('Updating tag')
    // {       steps{
      //           sh 'sed -i "s!currenttag!${BUILD_NUMBER}!g" k8s-dev/deployment.yaml '
@@ -38,9 +40,6 @@ pipeline {
              // sh 'kubectl apply -f k8s-dev/'
                 
             //}
-        //} 
-    
-}
-}
-  }
-}
+        //}
+//}
+//}
