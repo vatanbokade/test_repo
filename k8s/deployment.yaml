@@ -9,17 +9,17 @@ spec:
   selector:
     matchLabels:
       app: nginx
-template:
-  metadata:
-    labels:
-      app: nginx
-  spec:
-    containers:
-    - name: webserver1
-      image: nginx:1.6
-      ports:
-        - containerPort:80
-    - name: database-server
-      image: mysql-3.2
-      ports:
-        - containerPort:3306
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: webserver1
+        image: nginx:1.6
+        ports:
+          - containerPort:80
+      - name: database-server
+        image: mysql-3.2
+        ports:
+          - containerPort:3306
