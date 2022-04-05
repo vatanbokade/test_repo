@@ -5,7 +5,7 @@ metadata:
   labels:
    app: "nginx"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: "nginx"
@@ -17,9 +17,7 @@ spec:
       containers:
       - name: "webserver1"
         image: "nginx:1.6"
-        ports:
-          - containerPort:80
+        port: "80"
       - name: "database-server"
         image: "mysql-3.2"
-        ports:
-          - containerPort:3306
+        port: "3306"
