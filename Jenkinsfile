@@ -8,16 +8,10 @@ pipeline {
         git branch: 'main', url: 'https://github.com/vatanbokade/test_repo.git'
       }
     }
-  }
-}
+  
+
          
-    // stage('Build Docker image'){
-    //       steps{
-               
-    //            sh 'docker build -t asia-south1-docker.pkg.dev/em-uat/extramarks/newapigateway/dev:${BUILD_NUMBER} -f Dockerfile-dev .'
-    //       }
-    //   }
-    
+  
     // stage('Docker push to Artifact Registry')
     // {       steps{
     //             sh 'gcloud auth configure-docker asia-south1-docker.pkg.dev --quiet'
@@ -33,13 +27,13 @@ pipeline {
     
        //}
 
-         // stage('Deploy Staging') {
-           // steps{
+         stage('Deploy Staging') {
+            steps{
 
-             // sh 'gcloud container clusters get-credentials em-devuat-gke-cluster01 --zone asia-south1-a --project em-uat'
-             // sh 'kubectl apply -f k8s-dev/'
+              sh 'gcloud container clusters get-credentials cluster-vatan --zone asia-south1 --project business-transformers'
+              sh 'kubectl apply -f k8s/'
                 
-            //}
-        //}
-//}
-//}
+            }
+        }
+}
+}
