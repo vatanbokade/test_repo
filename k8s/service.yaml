@@ -1,15 +1,15 @@
-apiVersion: v1
-kind: Service
+---
+apiVersion: "v1"
+kind: "Service"
 metadata:
-  name: nginx-service  
+  name: "nginx-service"  
   labels:
-    app: nginx
+    app: "nginx"
 spec:
   ports:
-  - nodePort: 30500
-    port: 80
-    protocol: TCP
+  - protocol: "TCP"
+    port: 80    
     targetPort: 80
   selector:
-    app: nginx
-  type: NodePort
+    app: "nginx"
+  type: "LoadBalancer"
