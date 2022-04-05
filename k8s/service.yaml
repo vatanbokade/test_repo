@@ -1,0 +1,17 @@
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "virtual-meeting-backend-dev"
+  namespace: "dev"
+  labels:
+    app: "virtual-meeting-backend-dev"
+spec:
+  ports:
+  - protocol: "TCP"
+    port: 3001
+    targetPort: 3001
+  selector:
+    app: "virtual-meeting-backend-dev"
+  type: "LoadBalancer"
+  loadBalancerIP: ""

@@ -1,0 +1,53 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "virtual-meeting-backend-dev"
+  namespace: "dev"
+  labels:
+    app: "virtual-meeting-backend-dev"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "virtual-meeting-backend-dev"
+  template:
+    metadata:
+      labels:
+        app: "virtual-meeting-backend-dev"
+    spec:
+      containers:
+      - name: "virtual-meeting-backend-dev"
+        image: "asia-south1-docker.pkg.dev/em-uat/extramarks/virtual-meeting-backend/dev:currenttag"
+        #resources:
+        #  limits:
+        #    cpu: 100m
+        #    memory: 100Mi
+        #  requests:
+        #    cpu: 100m
+        #    memory: 100Mi
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "virtual-meeting-backend-dev"
+  namespace: "dev"
+  labels:
+    app: "virtual-meeting-backend-dev"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "virtual-meeting-backend-dev"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 60
+  - type: "Resource"
+    resource:
+      name: "memory"
+      targetAverageUtilization: 60
+
