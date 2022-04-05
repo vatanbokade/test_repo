@@ -1,53 +1,25 @@
----
-apiVersion: "apps/v1"
-kind: "Deployment"
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: "virtual-meeting-backend-dev"
-  namespace: "dev"
+  name: nginx-deployment1
   labels:
-    app: "virtual-meeting-backend-dev"
+	app: nginx
 spec:
-  replicas: 1
+  replicas: 2
   selector:
-    matchLabels:
-      app: "virtual-meeting-backend-dev"
-  template:
-    metadata:
-      labels:
-        app: "virtual-meeting-backend-dev"
-    spec:
-      containers:
-      - name: "virtual-meeting-backend-dev"
-        image: "asia-south1-docker.pkg.dev/em-uat/extramarks/virtual-meeting-backend/dev:currenttag"
-        #resources:
-        #  limits:
-        #    cpu: 100m
-        #    memory: 100Mi
-        #  requests:
-        #    cpu: 100m
-        #    memory: 100Mi
----
-apiVersion: "autoscaling/v2beta1"
-kind: "HorizontalPodAutoscaler"
-metadata:
-  name: "virtual-meeting-backend-dev"
-  namespace: "dev"
-  labels:
-    app: "virtual-meeting-backend-dev"
-spec:
-  scaleTargetRef:
-    kind: "Deployment"
-    name: "virtual-meeting-backend-dev"
-    apiVersion: "apps/v1"
-  minReplicas: 1
-  maxReplicas: 5
-  metrics:
-  - type: "Resource"
-    resource:
-      name: "cpu"
-      targetAverageUtilization: 60
-  - type: "Resource"
-    resource:
-      name: "memory"
-      targetAverageUtilization: 60
-
+    matchlabels:
+      app: nginx
+template:
+  metadata:
+    labels:
+      app: nginx
+  spec:
+    containers:
+    - name: webserver1
+	  image: nginx:1.6
+	  ports:
+ 	  - containerPort:80
+    - name: database-server
+	  image: mysql-3.2
+	  ports:
+ 	  - containerPort:3306
