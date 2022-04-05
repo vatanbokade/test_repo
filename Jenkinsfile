@@ -31,7 +31,7 @@ pipeline {
             steps{
 
               sh 'gcloud container clusters get-credentials cluster-vatan --zone asia-south1 --project business-transformers'
-              sh 'kubectl apply -f k8s/'
+              sh 'kubectl apply -f k8s/deployment.yaml'
                 
             }
         }
